@@ -4,7 +4,14 @@
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/princebhanderi/jenkins-pipeline-demo.git'
+                git branch: 'main', url: 'https://github.com/princebhanderi/jenkins-pipeline-demo.git'
+            }
+        }
+
+        stage('Check Python') {
+            steps {
+                bat 'python --version'
+                bat 'pip --version'
             }
         }
 
@@ -25,7 +32,7 @@
 
     post {
         always {
-            junit 'report.xml'
+            junit '**/report.xml'
         }
     }
 }
