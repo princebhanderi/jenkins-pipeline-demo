@@ -8,30 +8,26 @@
             }
         }
 
-        stage('Check Python') {
-            steps {
-                bat 'python --version'
-                bat 'pip --version'
-            }
-        }
-
         stage('Build') {
             steps {
                 echo 'Installing dependencies...'
-                bat 'pip install -r requirements.txt'
+                bat '"C:\\Users\\Prince Faldu\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" -m pip install --upgrade pip'
+                bat '"C:\\Users\\Prince Faldu\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" -m pip install -r requirements.txt'
+                bat '"C:\\Users\\Prince Faldu\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" -m pip install pytest'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                bat 'pytest --junitxml=report.xml'
+                bat '"C:\\Users\\Prince Faldu\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" -m pytest --junitxml=report.xml'
             }
         }
     }
 
     post {
         always {
+            echo 'Publishing test results...'
             junit '**/report.xml'
         }
     }
