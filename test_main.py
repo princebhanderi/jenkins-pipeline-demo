@@ -9,3 +9,4 @@ def test_addition():
 def test_subtraction():
     assert subtract(5, 2) == 3
     assert subtract(0, 5) == -5
+    assert subtract(0,3) == -3
